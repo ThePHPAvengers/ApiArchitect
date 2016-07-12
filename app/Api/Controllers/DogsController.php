@@ -2,11 +2,11 @@
 
 namespace Api\Controllers;
 
-use App\Dog;
-use App\Http\Requests;
 use Illuminate\Http\Request;
 use Api\Requests\DogRequest;
 use Api\Transformers\DogTransformer;
+use Illuminate\Support\Collection;
+use ApiArchitect\Repositories\Dog\DogRepository;
 
 /**
  * @Resource('Dogs', uri='/dogs')
@@ -14,9 +14,10 @@ use Api\Transformers\DogTransformer;
 class DogsController extends BaseController
 {
 
-    public function __construct() 
+    public function __construct(DogRepository $dogRepository)
     {
-        $this->middleware('jwt.auth');
+        $this->dogRepository = $dogRepository;
+    //    $this->middleware('jwt.auth');
     }
 
     /**
@@ -28,18 +29,18 @@ class DogsController extends BaseController
      */
     public function index()
     {
-        return $this->collection(Dog::all(), new DogTransformer);
+        return $this->collection(Collection::make($this->dogRepository->findAll()), new DogTransformer);
     }
 
     /**
      * Store a new dog in the database.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param DogRequest $request
+     * @return \ApiArchitect\Entities\Dog
      */
     public function store(DogRequest $request)
     {
-        return Dog::create($request->only(['name', 'age']));
+        return $this->dogRepository->create($request->only(['name', 'age']));
     }
 
     /**
@@ -50,19 +51,19 @@ class DogsController extends BaseController
      */
     public function show($id)
     {
-        return $this->item(Dog::findOrFail($id), new DogTransformer);
+        return $this->item(Collection::make($this->dogRepository->findAll()), new DogTransformer);
     }
 
     /**
      * Update the dog in the database.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param DogRequest $request
+     * @param $id
+     * @return mixed
      */
     public function update(DogRequest $request, $id)
     {
-        $dog = Dog::findOrFail($id);
+        $dog = $this->dogRepository->find($id);
         $dog->update($request->only(['name', 'age']));
         return $dog;
     }

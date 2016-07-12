@@ -1,11 +1,17 @@
 <?php
 
-namespace App\Providers;
+namespace ApiArchitect\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use ApiArchitect\Providers\User\DoctrineUserAdapter;
 
+/**
+ * Class AppServiceProvider
+ * @package ApiArchitect\Providers
+ */
 class AppServiceProvider extends ServiceProvider
 {
+
     /**
      * Bootstrap any application services.
      *
@@ -23,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(DoctrineUserAdapter::class, function($app) {
+            // This is what Doctrine's EntityRepository needs in its constructor.
+            return new DoctrineUserAdapter(
+                $app['em']
+            );
+        });
     }
 }

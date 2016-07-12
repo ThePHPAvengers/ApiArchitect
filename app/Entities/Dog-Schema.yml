@@ -1,0 +1,15 @@
+rdfa:
+ - tests/data/schema.rdfa
+relations:
+ - tests/data/v1.owl
+# The PHP namespace of generated entities
+namespaces:
+  entity: "ApiArchitect\\Entites\\Dog"
+# The list of types and properties we want to use
+types:
+  # Parent class of Person
+  Dog:
+    properties:
+      name: { range: "Text" }
+      name: { range: "Color" }
+      age:

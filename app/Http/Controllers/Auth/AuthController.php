@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace ApiArchitect\Http\Controllers\Auth;
 
-use App\User;
+use ApiArchitect\Repositories\User\UserRepository;
 use Validator;
-use App\Http\Controllers\Controller;
+use ApiArchitect\Entities\User;
+use ApiArchitect\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -24,12 +25,16 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
+     * AuthController constructor.
+     *
      * Create a new authentication controller instance.
      *
-     * @return void
+     * @param UserRepository $userRepository
      */
-    public function __construct()
+    public function __construct(UserRepository $userRepository)
     {
+        $this->userRepository = $userRepository;
+
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
@@ -56,10 +61,10 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        return $this->userRepository->create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'password' => $data['password']
         ]);
     }
 }

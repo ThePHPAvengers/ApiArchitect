@@ -136,18 +136,23 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        LaravelDoctrine\ORM\DoctrineServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        Dingo\Api\Provider\LaravelServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
+        Dingo\Api\Provider\LaravelServiceProvider::class,
+        ApiArchitect\Providers\AppServiceProvider::class,
+        ApiArchitect\Providers\AuthServiceProvider::class,
+        ApiArchitect\Providers\EventServiceProvider::class,
+        ApiArchitect\Providers\RouteServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        ApiArchitect\Providers\RepositoryServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        LaravelDoctrine\Migrations\MigrationsServiceProvider::class,
+        LaravelDoctrine\Extensions\GedmoExtensionsServiceProvider::class,
+        LaravelDoctrine\Extensions\BeberleiExtensionsServiceProvider::class,
 
     ],
 
@@ -200,6 +205,10 @@ return [
         'APIRoute'  => Dingo\Api\Facade\Route::class,
         'API'       => Dingo\Api\Facade\API::class,
         'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'EntityManager' => LaravelDoctrine\ORM\Facades\EntityManager::class,
+        'Registry'      => LaravelDoctrine\ORM\Facades\Registry::class,
+        'Doctrine'      => LaravelDoctrine\ORM\Facades\Doctrine::class,
+
     ],
 
 ];

@@ -4,6 +4,12 @@ namespace Api\Requests;
 
 use Dingo\Api\Http\FormRequest;
 
+/**
+ * Class UserRequest
+ *
+ * @package Api\Requests
+ * @author James Kirkby <hello@jameskirkby.com>
+ */
 class UserRequest extends FormRequest
 {
     /**
@@ -19,13 +25,15 @@ class UserRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
+     * @SEE dont use unique:* doctrine can't handle it
      * @return array
+     * @author James Kirkby <hello@jameskirkby.com>
      */
     public function rules()
     {
         return [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255',
             'password' => 'required|confirmed|min:4',
         ];
     }
