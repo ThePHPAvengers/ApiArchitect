@@ -10,7 +10,9 @@ use ApiArchitect\Abstracts\EntityAbstract;
  * Class Dog
  *
  * @ORM\Entity
+ * @Gedmo\Loggable
  * @ORM\Table(name="dogs")
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=true)
  * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\Dog\DogRepository")
  */
 class Dog extends EntityAbstract
@@ -29,7 +31,7 @@ class Dog extends EntityAbstract
     protected $age;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=false, nullable=true)
      */
     protected $color;
 
@@ -61,10 +63,30 @@ class Dog extends EntityAbstract
     }
 
     /**
+     * @param $name
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getAge()
     {
         return $this->age;
+    }
+
+    /**
+     * @param $age
+     * @return mixed
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+        return $age;
     }
 }

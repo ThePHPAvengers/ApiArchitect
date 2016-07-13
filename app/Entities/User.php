@@ -8,6 +8,7 @@ use LaravelDoctrine\ACL\Roles\HasRoles;
 use LaravelDoctrine\ACL\Mappings as ACL;
 use ApiArchitect\Abstracts\EntityAbstract;
 use LaravelDoctrine\ACL\Permissions\HasPermissions;
+use ApiArchitect\Contracts\DoctrineLoggableContract;
 use LaravelDoctrine\ACL\Contracts\HasRoles as HasRolesContract;
 use LaravelDoctrine\ORM\Auth\Authenticatable as AuthenticatableTrait;
 use LaravelDoctrine\ACL\Contracts\HasPermissions as HasPermissionContract;
@@ -23,10 +24,10 @@ use LaravelDoctrine\ORM\Contracts\Auth\Authenticatable as AuthenticatableContrac
  * @Gedmo\Loggable
  * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks()
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=true)
  * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\User\UserRepository")
  */
-class User extends EntityAbstract implements AuthenticatableContract, HasRolesContract, HasPermissionContract
+class User extends EntityAbstract implements AuthenticatableContract, HasRolesContract, HasPermissionContract, DoctrineLoggableContract
 {
 
     use AuthenticatableTrait, HasRoles, HasPermissions;
@@ -68,6 +69,15 @@ class User extends EntityAbstract implements AuthenticatableContract, HasRolesCo
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Returns user name, required for Doctrine behaviours loggable
+     * @return mixed
+     */
+    public function getUserName()
+    {
+        return $this->getName();
     }
 
     /**

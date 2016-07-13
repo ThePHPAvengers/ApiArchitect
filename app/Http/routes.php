@@ -16,12 +16,12 @@ $api->version('v1', function ($api) {
 		//$api->group( [ 'protected' => true, 'middleware' => 'jwt.refresh' ], function ($api) {
 		$api->group( [ 'middleware' => 'jwt.auth' ], function ($api) {
 			$api->get('dogs', 'DogsController@index');
-            $api->get('users/me', 'AuthController@me');
+            $api->get('users/me', 'AuthController@me');//@TODO BROKEN
             $api->post('dogs', 'DogsController@store');
 			$api->get('dogs/{id}', 'DogsController@show');
             $api->put('dogs/{id}', 'DogsController@update');
             $api->delete('dogs/{id}', 'DogsController@destroy');
             $api->get('validate_token', 'AuthController@validateToken');
 		});
-	});
+    });
 });

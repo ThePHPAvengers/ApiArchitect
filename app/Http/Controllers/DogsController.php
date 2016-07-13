@@ -37,7 +37,7 @@ class DogsController extends ApiController
      */
     public function index(Request $request)
     {
-        return $this->collection(Collection::make($this->repository->all()), $this->transformer);
+        return $this->sendResponse(Collection::make($this->repository->all()), $this->transformer);
     }
 
     /**
@@ -48,7 +48,7 @@ class DogsController extends ApiController
      */
     public function store(DogRequest $request)
     {
-        return $this->item(Collection::make($this->repository->create($request->only(['name', 'age'])), $this->transformer));
+        return $this->sendResponse(Collection::make($this->repository->create($request->only(['name', 'age'])), $this->transformer));
     }
 
     /**
@@ -59,7 +59,8 @@ class DogsController extends ApiController
      */
     public function show($id)
     {
-        return $this->item(Collection::make($this->repository->find($id), $this->transformer));
+
+        return $this->sendResponse(Collection::make($this->repository->find($id), $this->transformer));
     }
 
     /**
@@ -71,9 +72,9 @@ class DogsController extends ApiController
      */
     public function update(DogRequest $request, $id)
     {
-        $dog = $this->repository->find($id);
 
-        return $this->item(Collection::make($dog->update($request->only(['name', 'age']))), $this->transformer);
+
+        return $this->sendResponse(Collection::make($this->repository->update($id,$request->only(['name', 'age']))), $this->transformer);
     }
 
     /**

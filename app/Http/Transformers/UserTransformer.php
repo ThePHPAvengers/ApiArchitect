@@ -3,6 +3,7 @@
 namespace Api\Transformers;
 
 use ApiArchitect\Entities\User;
+use ApiArchitect\Abstracts\TransformerAbstract;
 
 /**
  * Class UserTransformer
@@ -10,7 +11,7 @@ use ApiArchitect\Entities\User;
  * @package ApiArchitect\Transformers
  * @author James Kirkby <hello@jameskirkby.com>
  */
-class UserTransformer extends AbstractTransformer
+class UserTransformer extends TransformerAbstract
 {
 
     /**

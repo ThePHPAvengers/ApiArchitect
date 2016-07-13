@@ -30,25 +30,16 @@ class AuthController extends ApiController
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
-        $this->middleware('guest', ['except' => 'getLogout']);
-
+        $this->transformer = new UserTransformer();
     }
 
     /**
      * @param Request $request
-     * @return mixed
+     * @return \Illuminate\Http\JsonResponse
      */
     public function me(Request $request)
     {
-        $transformer = new UserTransformer();
-
-        return response()->json(
-            Collection::make(
-                $transformer->transform($this->userRepository->find(
-                    JWTAuth::parseToken()->authenticate()
-                )
-            )
-        ));
+        return $this->item(Collection::make($this->userRepository->find(JWTAuth::parseToken()->authenticate())),$this->transformer);
     }
 
     /**
