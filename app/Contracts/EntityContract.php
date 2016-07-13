@@ -1,13 +1,13 @@
 <?php
 
-namespace ApiArchitect\Entities;
+namespace ApiArchitect\Contracts;
 
 /**
  * Interface NodeInterface
  * @package ApiArchitect\Entities
  * @author James Kirkby <hello@jameskirkby.com>
  */
-interface EntityInterface
+interface EntityContract
 {
 
     /*

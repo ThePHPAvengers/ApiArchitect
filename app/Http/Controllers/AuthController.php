@@ -2,12 +2,12 @@
 
 namespace Api\Controllers;
 
-use Api\Transformers\UserTransformer;
 use Dingo\Api\Facade\API;
 use Illuminate\Http\Request;
 use Api\Requests\UserRequest;
 use Illuminate\Support\Collection;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Api\Transformers\UserTransformer;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use ApiArchitect\Repositories\User\UserRepository;
 
@@ -17,7 +17,7 @@ use ApiArchitect\Repositories\User\UserRepository;
  * @package Api\Controllers
  * @author James Kirkby <hello@jameskirkby.com>
  */
-class AuthController extends BaseController
+class AuthController extends ApiController
 {
 
     /**
@@ -30,6 +30,8 @@ class AuthController extends BaseController
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
+        $this->middleware('guest', ['except' => 'getLogout']);
+
     }
 
     /**
@@ -73,6 +75,21 @@ class AuthController extends BaseController
     }
 
     /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6',
+        ]);
+    }
+
+    /**
      * @return mixed
      */
     public function validateToken() 
@@ -98,5 +115,20 @@ class AuthController extends BaseController
         $token = JWTAuth::fromUser($user);
 
         return response()->json(compact('token'));
+    }
+
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return User
+     */
+    protected function create(array $data)
+    {
+        return $this->userRepository->create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password']
+        ]);
     }
 }

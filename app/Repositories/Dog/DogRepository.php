@@ -4,13 +4,14 @@ namespace ApiArchitect\Repositories\Dog;
 
 use ApiArchitect\Entities\Dog;
 use Doctrine\ORM\EntityManager;
-use ApiArchitect\Repositories\AbstractRepository;
+use Doctrine\ORM\ORMInvalidArgumentException;
+use ApiArchitect\Abstracts\RepositoryAbstract;
 
 /**
  * Class DogRepository
  * @package ApiArchitect\Repositories\Dog
  */
-class DogRepository extends AbstractRepository
+class DogRepository extends RepositoryAbstract
 {
 
     /**
@@ -25,5 +26,27 @@ class DogRepository extends AbstractRepository
         $this->_em->flush();
 
         return $dog;
+    }
+
+    /**
+     * @param int $id
+     * @param array $data
+     * @return null|object
+     */
+    public function update($id,array $data)
+    {
+        $entity = $this->find($id);
+
+        if(key_exists('age',$data)){
+            $entity->setAge($data['age']);
+        }
+        if(key_exists('name',$data)){
+            $entity->setName($data['name']);
+        }
+
+        $this->_em->persist($entity);
+        $this->_em->flush();
+
+        return $entity;
     }
 }

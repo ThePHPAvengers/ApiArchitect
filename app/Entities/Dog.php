@@ -4,18 +4,16 @@ namespace ApiArchitect\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use ApiArchitect\Entities\AbstractEntity;
+use ApiArchitect\Abstracts\EntityAbstract;
 
 /**
  * Class Dog
  *
  * @ORM\Entity
- * @Gedmo\Loggable
  * @ORM\Table(name="dogs")
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=true)
  * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\Dog\DogRepository")
  */
-class Dog extends AbstractEntity
+class Dog extends EntityAbstract
 {
 
     /**

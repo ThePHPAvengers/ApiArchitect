@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiArchitect\Http\Middleware;
+namespace Api\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;

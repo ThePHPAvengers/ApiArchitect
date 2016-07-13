@@ -1,10 +1,18 @@
 <?php
 
-namespace ApiArchitect\Entities;
+namespace ApiArchitect\Abstracts;
 
+use Doctrine\ORM\Cache;
+use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\EventSubscriber;
+use Doctrine\Common\Util\ClassUtils;
 use Gedmo\Mapping\Annotation as Gedmo;
-use ApiArchitect\Entities\EntityInterface;
+use LaravelDoctrine\ACL\Roles\HasRoles;
+use LaravelDoctrine\ACL\Mappings as ACL;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
+use ApiArchitect\Contracts\EntityContract;
 use LaravelDoctrine\Extensions\Timestamps\Timestamps;
 use LaravelDoctrine\Extensions\SoftDeletes\SoftDeletes;
 use LaravelDoctrine\Extensions\IpTraceable\IpTraceable;
@@ -14,11 +22,8 @@ use LaravelDoctrine\Extensions\IpTraceable\IpTraceable;
  *
  * @package ApiArchitect\Entities
  * @author James Kirkby <hello@jameskirkby.com>
- *
- * @Gedmo\Loggable
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=true)
  */
-abstract class AbstractEntity implements EntityInterface
+abstract class EntityAbstract implements EntityContract
 {
 
     use IpTraceable, SoftDeletes, Timestamps;
@@ -44,7 +49,7 @@ abstract class AbstractEntity implements EntityInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer", unique=true, nullable=false)
      */
-    protected $id;
+    public $id;
 
     /**
      * @var
@@ -141,9 +146,9 @@ abstract class AbstractEntity implements EntityInterface
     /**
      * @var datetime $contentChangedFromIp
      *
-     * @Gedmo\Blameable(on="change")
-     * @Gedmo\IpTraceable(on="change", field={"id"})
+     * @Gedmo\IpTraceable(on="change", field={"name", "password", "email", "id"})
      * @ORM\Column(name="content_changed_by_ip", type="string", nullable=true, length=45)
+     * @Gedmo\Blameable(on="create")
      */
     protected $contentChangedFromIp;
 
@@ -162,9 +167,8 @@ abstract class AbstractEntity implements EntityInterface
     */
 
     /**
-     * @Gedmo\Blameable(on="delete")
-     * @Gedmo\IpTraceable(on="delete")
      * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="create")
      */
     protected $deletedAt;
 
@@ -184,8 +188,6 @@ abstract class AbstractEntity implements EntityInterface
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
-     * @Gedmo\Blameable(on="create")
-     * @Gedmo\IpTraceable(on="create")
      * @Gedmo\Timestampable(on="create")
      */
     protected $created;
@@ -194,16 +196,11 @@ abstract class AbstractEntity implements EntityInterface
      * @var \DateTime $updated
      *
      * @ORM\Column(type="datetime")
-     * @Gedmo\Blameable(on="update")
-     * @Gedmo\IpTraceable(on="update")
      * @Gedmo\Timestampable(on="update")
      */
     protected $updated;
 
     /**
-     * @Gedmo\Blameable(on="change")
-     * @Gedmo\IpTraceable(on="change")
-     * @Gedmo\Timestampable(on="change", field={"id"})
      * @ORM\Column(name="content_changed", type="datetime", nullable=true)
      */
     protected $contentChanged;
@@ -216,5 +213,42 @@ abstract class AbstractEntity implements EntityInterface
     public function getContentChangedBy()
     {
         return $this->contentChangedBy;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Doctrine Life Cycle Event Functions
+    |--------------------------------------------------------------------------
+    |
+    | Functions ran on the doctrine life cycle of events
+    |
+    */
+
+    /**
+     * Life cycle event called after flush
+     * Use this to send entity to cache
+     *
+     * @ORM\PostFlush
+     */
+//    abstract public function postFlush();
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        $now = new \DateTime;
+        $this->createdAt = $now;
+        $this->updatedAt = $now;
+        $this->contentChangedFromIp = '192.168.0.0';
+    }
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->updatedAt = new \DateTime;
+        $this->contentChangedFromIp = '192.168.0.0';
+
     }
 }

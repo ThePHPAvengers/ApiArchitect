@@ -4,9 +4,14 @@ namespace ApiArchitect\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use ApiArchitect\Entities\AbstractEntity;
+use LaravelDoctrine\ACL\Roles\HasRoles;
+use LaravelDoctrine\ACL\Mappings as ACL;
+use ApiArchitect\Abstracts\EntityAbstract;
+use LaravelDoctrine\ACL\Permissions\HasPermissions;
+use LaravelDoctrine\ACL\Contracts\HasRoles as HasRolesContract;
 use LaravelDoctrine\ORM\Auth\Authenticatable as AuthenticatableTrait;
-use LaravelDoctrine\ORM\Contracts\Auth\Authenticatable as AuthenticatableInterface;
+use LaravelDoctrine\ACL\Contracts\HasPermissions as HasPermissionContract;
+use LaravelDoctrine\ORM\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
 /**
  * Class User
@@ -17,13 +22,14 @@ use LaravelDoctrine\ORM\Contracts\Auth\Authenticatable as AuthenticatableInterfa
  * @ORM\Entity
  * @Gedmo\Loggable
  * @ORM\Table(name="users")
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=true)
+ * @ORM\HasLifecycleCallbacks()
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\User\UserRepository")
  */
-class User extends AbstractEntity implements AuthenticatableInterface
+class User extends EntityAbstract implements AuthenticatableContract, HasRolesContract, HasPermissionContract
 {
 
-    use AuthenticatableTrait;
+    use AuthenticatableTrait, HasRoles, HasPermissions;
 
     /**
      * @var
@@ -36,6 +42,17 @@ class User extends AbstractEntity implements AuthenticatableInterface
      * @ORM\Column(type="string", length=254, unique=true)
      */
     protected $email;
+
+    /**
+     * @ACL\HasRoles()
+     * @var \Doctrine\Common\Collections\ArrayCollection|\LaravelDoctrine\ACL\Contracts\Role[]
+     */
+    protected $roles;
+
+    /**
+     * @ACL\HasPermissions
+     */
+    public $permissions;
 
     /**
      * @return mixed
@@ -72,6 +89,14 @@ class User extends AbstractEntity implements AuthenticatableInterface
     }
 
     /**
+     * @return mixed
+     */
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
+
+    /**
      * @param $email
      * @return $this
      */
@@ -79,6 +104,14 @@ class User extends AbstractEntity implements AuthenticatableInterface
     {
         $this->email = $email;
         return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection|\LaravelDoctrine\ACL\Contracts\Role[]
+     */
+    public function getRoles()
+    {
+        return $this->roles;
     }
 
     /**

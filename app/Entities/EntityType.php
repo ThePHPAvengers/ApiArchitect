@@ -5,7 +5,7 @@ namespace ApiArchitect\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use ApiArchitect\Entities\AbstractEntity;
+use ApiArchitect\Abstracts\EntityAbstract;
 
 /**
  * Class User
@@ -14,12 +14,10 @@ use ApiArchitect\Entities\AbstractEntity;
  * @author James Kirkby <me@jameskirkby.com>
  *
  * @ORM\Entity
- * @Gedmo\Loggable
  * @ORM\Table(name="entity_type")
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=true)
  * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\EntityTypeRepository")
  */
-class EntityType extends AbstractEntity
+class EntityType extends EntityAbstract
 {
 
     /**

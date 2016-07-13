@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiArchitect\Http;
+namespace Api;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -28,7 +28,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         // 'auth' => \ApiArchitect\Http\Middleware\Authenticate::class,
         // 'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \ApiArchitect\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \Api\Middleware\RedirectIfAuthenticated::class,
         'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
         'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class,
     ];

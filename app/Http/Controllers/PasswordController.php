@@ -1,11 +1,11 @@
 <?php
 
-namespace ApiArchitect\Http\Controllers\Auth;
+namespace Api\Controllers\Auth;
 
-use ApiArchitect\Http\Controllers\Controller;
+use Http\Api\Controllers\ApiController;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
-class PasswordController extends Controller
+class PasswordController extends ApiController
 {
     /*
     |--------------------------------------------------------------------------
@@ -21,9 +21,9 @@ class PasswordController extends Controller
     use ResetsPasswords;
 
     /**
-     * Create a new password controller instance.
+     * PasswordController constructor.
      *
-     * @return void
+     * Create a new password controller instance.
      */
     public function __construct()
     {

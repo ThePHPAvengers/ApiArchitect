@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiArchitect\Providers\User;
+namespace ApiArchitect\Adapters\User;
 
 use Doctrine\ORM\EntityManager;
 use Tymon\JWTAuth\Providers\User\UserInterface;
@@ -34,5 +34,10 @@ class DoctrineUserAdapter implements UserInterface
     public function getBy($key, $value)
     {
         return $this->find($value);
+    }
+
+    public function getId()
+    {
+        return $this->getId();
     }
 }

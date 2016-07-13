@@ -3,14 +3,13 @@
 namespace ApiArchitect\Repositories\User;
 
 use ApiArchitect\Entities\User;
-use Doctrine\ORM\EntityManager;
-use ApiArchitect\Repositories\AbstractRepository;
+use ApiArchitect\Abstracts\RepositoryAbstract;
 
 /**
  * Class UserRepository
  * @package ApiArchitect\Repositories\Dog
  */
-class UserRepository extends AbstractRepository
+class UserRepository extends RepositoryAbstract
 {
 
     /**
@@ -49,5 +48,27 @@ class UserRepository extends AbstractRepository
         //@TODO try catch check if email is unique value then return a formatted response at moment returns geenri sql error
 
         return $user;
+    }
+
+    /**
+     * @param int $id
+     * @param array $data
+     * @return null|object
+     */
+    public function update($id,array $data)
+    {
+        $entity = $this->find($id);
+
+        if(key_exists('name',$data)){
+            $entity->setName($data['name']);
+        }
+        if(key_exists('email',$data)){
+            $entity->setEmail($data['email']);
+        }
+
+        $this->_em->persist($entity);
+        $this->_em->flush();
+
+        return $entity;
     }
 }
