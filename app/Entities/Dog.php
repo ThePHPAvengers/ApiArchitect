@@ -9,6 +9,8 @@ use ApiArchitect\Abstracts\EntityAbstract;
 /**
  * Class Dog
  *
+ * @author James Kirkby <hello@jameskirkby.com>
+ *
  * @ORM\Entity
  * @Gedmo\Loggable
  * @ORM\Table(name="dogs")

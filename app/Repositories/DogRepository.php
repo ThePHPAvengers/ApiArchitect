@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiArchitect\Repositories\Dog;
+namespace ApiArchitect\Repositories;
 
 use ApiArchitect\Entities\Dog;
 use Doctrine\ORM\EntityManager;
@@ -9,7 +9,9 @@ use ApiArchitect\Abstracts\RepositoryAbstract;
 
 /**
  * Class DogRepository
+ *
  * @package ApiArchitect\Repositories\Dog
+ * @author James Kirkby <hello@jameskirkby.com>
  */
 class DogRepository extends RepositoryAbstract
 {

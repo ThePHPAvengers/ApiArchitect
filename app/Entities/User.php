@@ -7,10 +7,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use LaravelDoctrine\ACL\Roles\HasRoles;
 use LaravelDoctrine\ACL\Mappings as ACL;
 use ApiArchitect\Abstracts\EntityAbstract;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use LaravelDoctrine\ACL\Permissions\HasPermissions;
 use ApiArchitect\Contracts\DoctrineLoggableContract;
 use LaravelDoctrine\ACL\Contracts\HasRoles as HasRolesContract;
 use LaravelDoctrine\ORM\Auth\Authenticatable as AuthenticatableTrait;
+use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
 use LaravelDoctrine\ACL\Contracts\HasPermissions as HasPermissionContract;
 use LaravelDoctrine\ORM\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
@@ -22,15 +24,15 @@ use LaravelDoctrine\ORM\Contracts\Auth\Authenticatable as AuthenticatableContrac
  *
  * @ORM\Entity
  * @Gedmo\Loggable
- * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=true)
  * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\User\UserRepository")
+ * @ORM\Table(name="users", indexes={@ORM\Index(name="search_idx", columns={"email"})})
  */
-class User extends EntityAbstract implements AuthenticatableContract, HasRolesContract, HasPermissionContract, DoctrineLoggableContract
+class User extends EntityAbstract implements AuthenticatableContract, HasRolesContract, HasPermissionContract, DoctrineLoggableContract, CanResetPassword
 {
 
-    use AuthenticatableTrait, HasRoles, HasPermissions;
+    use AuthenticatableTrait, HasRoles, HasPermissions, CanResetPasswordTrait;
 
     /**
      * @var
@@ -138,5 +140,20 @@ class User extends EntityAbstract implements AuthenticatableContract, HasRolesCo
     public function getAuthIdentifier()
     {
         return $this->id;
+    }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:ApiArchitect\Entities\User,username',
+            'password' => 'required|confirmed|min:8',
+        ]);
     }
 }

@@ -7,7 +7,9 @@ use Tymon\JWTAuth\Providers\User\UserInterface;
 
 /**
  * Class DoctrineUserAdapter
+ *
  * @package ApiArchitect\Providers\User
+ * @author James Kirkby <hello@jameskirkby.com>
  */
 class DoctrineUserAdapter implements UserInterface
 {
@@ -36,6 +38,9 @@ class DoctrineUserAdapter implements UserInterface
         return $this->find($value);
     }
 
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->getId();

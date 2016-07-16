@@ -2,7 +2,7 @@
 
 namespace Api\Controllers\Auth;
 
-use Http\Api\Controllers\ApiController;
+use Api\Controllers\ApiController;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends ApiController

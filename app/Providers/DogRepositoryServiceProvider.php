@@ -3,17 +3,22 @@
 namespace ApiArchitect\Providers;
 
 use ApiArchitect\Entities\Dog;
-use ApiArchitect\Entities\User;
 use Illuminate\Support\ServiceProvider;
-use ApiArchitect\Repositories\Dog\DogRepository;
-use ApiArchitect\Repositories\User\UserRepository;
+use ApiArchitect\Repositories\DogRepository;
 
 /**
- * Class AppServiceProvider
+ * Class DogRepositoryServiceProvider
+ *
  * @package ApiArchitect\Providers
+ * @author James Kirkby <hello@jameskirkby.com>
  */
-class RepositoryServiceProvider extends ServiceProvider
+class DogRepositoryServiceProvider extends ServiceProvider
 {
+
+    /**
+     * @var bool
+     */
+    protected $defer = true;
 
     /**
      * Bootstrap any application services.
@@ -32,14 +37,6 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(UserRepository::class, function($app) {
-            // This is what Doctrine's EntityRepository needs in its constructor.
-            return new UserRepository(
-                $app['em'],
-                $app['em']->getClassMetaData(User::class)
-            );
-        });
-
         $this->app->bind(DogRepository::class, function($app) {
             // This is what Doctrine's EntityRepository needs in its constructor.
             return new DogRepository(
@@ -47,5 +44,15 @@ class RepositoryServiceProvider extends ServiceProvider
                 $app['em']->getClassMetaData(Dog::class)
             );
         });
+    }
+
+    /**
+     * Get the services provided by the provider since we are deferring load.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['ApiArchitect\Repositories\DogRepository'];
     }
 }

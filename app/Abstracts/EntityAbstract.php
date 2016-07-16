@@ -104,7 +104,7 @@ abstract class EntityAbstract implements EntityContract
     /**
      * @var string $contentChangedBy
      *
-     * @Gedmo\Blameable(on="change", field={"id"})
+     * @Gedmo\Blameable(on="change", field={"id","name","email"})
      * @ORM\Column(name="content_changed_by", type="string", nullable=true)
      */
     protected $contentChangedBy;
@@ -232,23 +232,23 @@ abstract class EntityAbstract implements EntityContract
      */
 //    abstract public function postFlush();
 
-    /**
-     * @ORM\PrePersist
-     */
-    public function prePersist()
-    {
-        $now = new \DateTime;
-        $this->createdAt = $now;
-        $this->updatedAt = $now;
-        $this->contentChangedFromIp = '192.168.0.0';
-    }
-    /**
-     * @ORM\PreUpdate
-     */
-    public function preUpdate()
-    {
-        $this->updatedAt = new \DateTime;
-        $this->contentChangedFromIp = '192.168.0.0';
-
-    }
+//    /**
+//     * @ORM\PrePersist
+//     */
+//    public function prePersist()
+//    {
+//        $now = new \DateTime;
+//        $this->createdAt = $now;
+//        $this->updatedAt = $now;
+//        $this->contentChangedFromIp = '192.168.0.0';
+//    }
+//    /**
+//     * @ORM\PreUpdate
+//     */
+//    public function preUpdate()
+//    {
+//        $this->updatedAt = new \DateTime;
+//        $this->contentChangedFromIp = '192.168.0.0';
+//
+//    }
 }

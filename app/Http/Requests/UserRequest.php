@@ -3,6 +3,7 @@
 namespace Api\Requests;
 
 use Dingo\Api\Http\FormRequest;
+use \Illuminate\Support\Facades\Validator;
 
 /**
  * Class UserRequest
@@ -25,7 +26,6 @@ class UserRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @SEE dont use unique:* doctrine can't handle it
      * @return array
      * @author James Kirkby <hello@jameskirkby.com>
      */
@@ -33,8 +33,8 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255',
-            'password' => 'required|confirmed|min:4',
+            'email' => 'required|email|max:255|unique:ApiArchitect\Entities\User,email',
+            'password' => 'required|confirmed|min:8',
         ];
     }
 }

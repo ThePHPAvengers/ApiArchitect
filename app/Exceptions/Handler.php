@@ -39,11 +39,16 @@ class Handler extends ExceptionHandler
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $e
      * @return \Illuminate\Http\Response
+     * @TODO hook into response function
      */
     public function render($request, Exception $e)
     {
         if ($e instanceof ModelNotFoundException) {
             $e = new NotFoundHttpException($e->getMessage(), $e);
+        }
+
+        if($e instanceof ApiException || $e instanceof ApiException ){
+            return [null,$e->getMessage(),$e->getCode()];
         }
 
         return parent::render($request, $e);

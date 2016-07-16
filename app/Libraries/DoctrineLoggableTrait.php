@@ -1,14 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Satoshi
- * Date: 13/07/2016
- * Time: 16:10
- */
 
 namespace ApiArchitect\Libraries;
 
-
+/**
+ * Class DoctrineLoggableTrait
+ *
+ * @package ApiArchitect\Libraries
+ * @author James Kirkby <hello@jameskirkby.com>
+ */
 class DoctrineLoggableTrait
 {
 

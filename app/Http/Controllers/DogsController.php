@@ -6,26 +6,27 @@ use Illuminate\Http\Request;
 use Api\Requests\DogRequest;
 use Illuminate\Support\Collection;
 use Api\Transformers\DogTransformer;
-use ApiArchitect\Repositories\Dog\DogRepository;
+use ApiArchitect\Repositories\DogRepository;
 
 /**
  * Class DogsController
- * @package Api\Controllers
  *
+ * @package Api\Controllers
  * @Resource('Dogs', uri='/dogs')
+ * @author James Kirkby <hello@jameskirkby.com>
  */
 class DogsController extends ApiController
 {
 
     /**
      * DogsController constructor.
+     *
      * @param DogRepository $dogRepository
      */
     public function __construct(DogRepository $dogRepository)
     {
         $this->repository = $dogRepository;
         $this->transformer = new DogTransformer;
-    //    $this->middleware('jwt.auth');
     }
 
     /**
@@ -37,7 +38,7 @@ class DogsController extends ApiController
      */
     public function index(Request $request)
     {
-        return $this->sendResponse(Collection::make($this->repository->all()), $this->transformer);
+        return $this->sendResponse(Collection::make($this->repository->all()),$this->transformer);
     }
 
     /**

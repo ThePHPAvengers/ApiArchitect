@@ -13,19 +13,27 @@ use ApiArchitect\Abstracts\TransformerAbstract;
  */
 class UserTransformer extends TransformerAbstract
 {
+    /**
+     * @param User $user
+     * @return UserTransformer
+     */
+    public function transform(User $user)
+    {
+        return $this->doTransform($user);
+    }
 
     /**
-     * @param User $User
-     * @return array
+     * @param $object
+     * @return static
      */
-    public function transform(User $User)
+    protected function doTransform($object)
     {
-        return [
+        return $this->abstractResponseFormat([
             'user' => [
-                'id' 	=> $User->getId(),
-                'name'  => $User->getName(),
-                'email'	=> $User->getEmail()
+                'id' 	=> $object->getId(),
+                'name'  => $object->getName(),
+                'email'	=> $object->getEmail()
             ]
-        ];
+        ]);
     }
 }

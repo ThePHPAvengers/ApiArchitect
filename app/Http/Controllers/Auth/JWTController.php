@@ -4,20 +4,20 @@ namespace Api\Controllers;
 
 use Illuminate\Http\Request;
 use Api\Requests\UserRequest;
-use Api\Controllers\ApiController;
 use Illuminate\Support\Collection;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Api\Transformers\UserTransformer;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Api\Controllers\Auth\BaseAuthController;
 use ApiArchitect\Repositories\UserRepository;
 
 /**
- * Class BaseAuthController
+ * Class AuthController
  *
  * @package Api\Controllers
  * @author James Kirkby <hello@jameskirkby.com>
  */
-class AuthController extends ApiController
+class AuthController extends BaseAuthController
 {
 
     /**
@@ -74,7 +74,7 @@ class AuthController extends ApiController
     /**
      * @return mixed
      */
-    public function validateToken()
+    public function validateToken() 
     {
         // Our routes file should have already authenticated this token, so we just return success here
         return $this->sendResponse(Collection::make(['status' => 'success'])->statusCode(200));

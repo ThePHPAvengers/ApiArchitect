@@ -3,13 +3,14 @@
 namespace Api\Transformers;
 
 use ApiArchitect\Entities\Dog;
-use League\Fractal\TransformerAbstract;
+use Illuminate\Support\Collection;
+use ApiArchitect\Abstracts\TransformerAbstract;
 
 /**
  * Class DogTransformer
  *
  * @package Api\Transformers
- * @author James Kirkby <heelo@jameskirkby.com>
+ * @author James Kirkby <hello@jameskirkby.com>
  */
 class DogTransformer extends TransformerAbstract
 {

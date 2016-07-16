@@ -4,7 +4,9 @@ namespace ApiArchitect\Contracts;
 
 /**
  * Interface RepositoryInterface
+ *
  * @package ApiArchitect\Repositories
+ * @author James Kirkby <hello@jameskirkby.com>
  */
 interface RepositoryContract
 {

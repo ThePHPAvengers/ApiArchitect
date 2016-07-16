@@ -1,13 +1,15 @@
 <?php
 
-namespace ApiArchitect\Repositories\User;
+namespace ApiArchitect\Repositories;
 
 use ApiArchitect\Entities\User;
 use ApiArchitect\Abstracts\RepositoryAbstract;
 
 /**
  * Class UserRepository
+ *
  * @package ApiArchitect\Repositories\Dog
+ * @author James Kirkby <hello@jameskirkby.com>
  */
 class UserRepository extends RepositoryAbstract
 {

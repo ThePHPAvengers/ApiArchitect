@@ -1,17 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Satoshi
- * Date: 13/07/2016
- * Time: 15:00
- */
 
 namespace ApiArchitect\Abstracts;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Gedmo\Loggable\Entity\AbstractLog
+ * Class LogEntryAbstract
+ *
+ * @package ApiArchitect\Abstracts
+ * @see Gedmo\Loggable\Entity\AbstractLog
+ * @author James Kirkby <hello@jameskirkby.com>
  *
  * @ORM\MappedSuperclass
  */

@@ -10,7 +10,9 @@ use ApiArchitect\Contracts\RepositoryContract;
 
 /**
  * Class RepositoryAbstract
+ *
  * @package ApiArchitect\Abstracts
+ * @author James Kirkby <hello@jameskirkby.com>
  */
 abstract class RepositoryAbstract extends EntityRepository implements RepositoryContract
 {

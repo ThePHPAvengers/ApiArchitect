@@ -4,6 +4,7 @@ namespace ApiArchitect\Contracts;
 
 /**
  * Interface NodeInterface
+ *
  * @package ApiArchitect\Entities
  * @author James Kirkby <hello@jameskirkby.com>
  */
