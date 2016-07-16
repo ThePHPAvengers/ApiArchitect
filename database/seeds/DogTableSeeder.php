@@ -11,6 +11,6 @@ class DogTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Dog::class, 10)->create();
+        factory(ApiArchitect\Dog::class, 10)->create();
     }
 }

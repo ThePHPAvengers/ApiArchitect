@@ -6,26 +6,37 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.1.*",
         "dingo/api": "1.0.*@dev",
-        "tymon/jwt-auth": "0.5.*",
-        "barryvdh/laravel-cors": "^0.7.1"
+        "tymon/jwt-auth": "0.5.9",
+        "laravel/socialite": "^2.0",
+        "laravel/framework": "5.1.*",
+        "laravel-doctrine/orm": "1.0.*",
+        "laravel-doctrine/acl": "1.0.*",
+        "laravel-doctrine/fluent": "^1.1",
+        "barryvdh/laravel-cors": "^0.7.1",
+        "gedmo/doctrine-extensions": "^2.4",
+        "beberlei/DoctrineExtensions": "^1.0",
+        "kozz/laravel-doctrine-cache": "^1.0",
+        "laravel-doctrine/extensions": "1.0.*",
+        "laravel-doctrine/migrations": "1.0.*",
+        "lucadegasperi/oauth2-server-laravel": "5.1.*"
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^2.1",
         "doctrine/dbal": "^2.5",
-        "fzaninotto/faker": "~1.4",
-        "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
-        "phpspec/phpspec": "~2.1"
+        "phpspec/phpspec": "~2.1",
+        "mockery/mockery": "0.9.*",
+        "fzaninotto/faker": "~1.4",
+        "barryvdh/laravel-ide-helper": "^2.1",
+        "api-platform/schema-generator": "^1.1"
     },
     "autoload": {
         "classmap": [
             "database"
         ],
         "psr-4": {
-            "App\\": "app/",
-            "Api\\": "app/Api/"
+            "Api\\": "app/Http",
+            "ApiArchitect\\": "app/"
         }
     },
     "autoload-dev": {
