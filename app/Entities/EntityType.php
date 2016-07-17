@@ -14,8 +14,8 @@ use ApiArchitect\Abstracts\EntityAbstract;
  * @author James Kirkby <hello@jameskirkby.com>
  *
  * @ORM\Entity
- * @ORM\Table(name="entity_type", indexes={@ORM\Index(name="search_idx", columns={"type"})})
  * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\EntityTypeRepository")
+ * @ORM\Table(name="entity_type", indexes={@ORM\Index(name="search_idx", columns={"type"})})
  */
 class EntityType extends EntityAbstract
 {
@@ -28,4 +28,13 @@ class EntityType extends EntityAbstract
      * @ORM\Column(type="string", unique=true, nullable=false)
      */
     protected $type;
+
+    /**
+     * @var
+     *
+     * @Gedmo\Blameable(on="create")
+     * @Gedmo\IpTraceable(on="create")
+     * @ORM\Column(type="string", unique=true, nullable=false)
+     */
+    protected $breadcrumb;
 }

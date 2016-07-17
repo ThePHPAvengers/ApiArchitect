@@ -26,7 +26,7 @@ use LaravelDoctrine\ORM\Contracts\Auth\Authenticatable as AuthenticatableContrac
  * @Gedmo\Loggable
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=true)
- * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\User\UserRepository")
+ * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\UserRepository")
  * @ORM\Table(name="users", indexes={@ORM\Index(name="search_idx", columns={"email"})})
  */
 class User extends EntityAbstract implements AuthenticatableContract, HasRolesContract, HasPermissionContract, DoctrineLoggableContract, CanResetPassword

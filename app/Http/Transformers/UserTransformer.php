@@ -33,7 +33,7 @@ class UserTransformer extends TransformerAbstract
                 'id' 	=> $object->getId(),
                 'name'  => $object->getName(),
                 'email'	=> $object->getEmail()
-            ]
+            ],
         ]);
     }
 }

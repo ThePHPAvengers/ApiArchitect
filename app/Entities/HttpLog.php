@@ -22,6 +22,11 @@ use ApiArchitect\Abstracts\EntityAbstract;
 class HttpLog extends EntityAbstract
 {
 
+    public function __construct()
+    {
+        $this->contentType = 'HttpLog';
+    }
+
     /**
      * @var
      *

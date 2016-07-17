@@ -61,6 +61,24 @@
         ],
         "post-create-project-cmd": [
             "php artisan key:generate"
+        ],
+        "refresh-bootstrap": [
+            "php artisan clear-compiled",
+            "php artisan config:clear",
+            "php artisan route:clear",
+            "php artisan view:clear",
+            "php artisan doctrine:clear:metadata:cache",
+            "php artisan doctrine:clear:query:cache",
+            "php artisan doctrine:clear:result:cache",
+            "php artisan doctrine:clear:query:cache",
+            "php artisan cache:clear",
+            "php artisan clear-compiled",
+            "php artisan doctrine:schema:update",
+            "composer dump-autoload",
+            "php artisan api:cache",
+            "php artisan config:cache",
+            "php artisan route:cache",
+            "php artisan optimize"
         ]
     },
     "config": {

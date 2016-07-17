@@ -23,8 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(CacheManager $cache)
     {
-        $cache->extend('memcached', function(Application $app) {
-        $memcached = new \Memcached;
+        $cache->extend('memcache', function(Application $app) {
+        $memcached = new \Memcache;
         return new MemcachedCache($memcached);
     });
     }

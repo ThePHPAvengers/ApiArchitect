@@ -22,6 +22,8 @@ use LaravelDoctrine\Extensions\IpTraceable\IpTraceable;
  *
  * @package ApiArchitect\Entities
  * @author James Kirkby <hello@jameskirkby.com>
+ *
+ * @ORM\MappedSuperclass
  */
 abstract class EntityAbstract implements EntityContract
 {
@@ -54,13 +56,11 @@ abstract class EntityAbstract implements EntityContract
     /**
      * @var
      *
-     * @ORM\Column(nullable=false)
-     * @OneToOne(targetEntity="EntityType")
-     * @Gedmo\Blameable(on="create","update","change","delete")
-     * @Gedmo\IpTraceable(on="create","update","change","delete")
-     * @JoinColumn(name="entity_type_id", referencedColumnName="id")
+     * @Gedmo\Blameable(on="create")
+     * @Gedmo\IpTraceable(on="create")
+     * @ORM\Column(type="string", nullable=false, columnDefinition="ENUM('HttpLog', 'Dog')")
      */
-    private $contentType;
+    protected $contentType;
 
     /*
     |--------------------------------------------------------------------------
@@ -213,6 +213,16 @@ abstract class EntityAbstract implements EntityContract
     public function getContentChangedBy()
     {
         return $this->contentChangedBy;
+    }
+
+    /**
+     * @param $contentType
+     * @return $this
+     */
+    public function setContentType($contentType)
+    {
+        $this->contentType = $contentType;
+        return $this;
     }
 
     /*

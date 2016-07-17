@@ -143,6 +143,7 @@ return [
         LaravelDoctrine\ACL\AclServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
         ApiArchitect\Providers\AppServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
         ApiArchitect\Providers\AuthServiceProvider::class,
         ApiArchitect\Providers\EventServiceProvider::class,
         ApiArchitect\Providers\RouteServiceProvider::class,
@@ -207,9 +208,10 @@ return [
         'API'           => Dingo\Api\Facade\API::class,
         'APIRoute'      => Dingo\Api\Facade\Route::class,
         'JWTAuth'       => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Registry'      => LaravelDoctrine\ORM\Facades\Registry::class,
         'Doctrine'      => LaravelDoctrine\ORM\Facades\Doctrine::class,
         'EntityManager' => LaravelDoctrine\ORM\Facades\EntityManager::class,
-        'Authorizer' => LucaDegasperi\OAuth2Server\Facades\Authorizer::class
+        'Authorizer' => LucaDegasperi\OAuth2Server\Facades\Authorizer::class,
     ],
 ];
