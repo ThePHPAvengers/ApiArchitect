@@ -17,6 +17,16 @@ $api->version('v1', function ($api)
             // V1 Routes
             $api->group(['prefix' => 'v1'], function ($api)
             {
+                // Socialite Callback Routes
+                $api->group(['prefix' => 'social'], function ($api)
+                {
+                    $api->group(['prefix' => 'auth'], function ($api)
+                    {
+                        Route::get('github', 'Auth\Social\GitHubController@redirectToProvider');
+                        Route::get('github/callback', 'Auth\Social\GitHubController@handleProviderCallback');
+                    });
+                });
+
                 // User Reset Routes
                 $api->group(['prefix' => 'users'], function ($api)
                 {
