@@ -43,6 +43,6 @@ class DoctrineUserAdapter implements UserInterface
      */
     public function getId()
     {
-        return $this->getId();
+        return $this->em->getId();
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace ApiArchitect\Repositories;
+namespace ApiArchitect\Repositories\Core;
 
+use ApiArchitect\Abstracts\Core\Repositories\RepositoryAbstract;
 use Illuminate\Http\Request;
 use Doctrine\ORM\EntityManager;
 use ApiArchitect\Entities\HttpLog;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Input;
 use Doctrine\ORM\ORMInvalidArgumentException;
-use ApiArchitect\Abstracts\RepositoryAbstract;
 
 /**
  * Class HttpLogRepository

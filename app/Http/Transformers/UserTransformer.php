@@ -2,8 +2,8 @@
 
 namespace Api\Transformers;
 
-use ApiArchitect\Entities\User;
-use ApiArchitect\Abstracts\TransformerAbstract;
+use ApiArchitect\Entities\Core\User;
+use ApiArchitect\Abstracts\Core\Http\Transformers\TransformerAbstract;
 
 /**
  * Class UserTransformer

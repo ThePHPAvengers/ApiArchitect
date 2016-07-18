@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Api\Transformers\UserTransformer;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use ApiArchitect\Repositories\UserRepository;
+use ApiArchitect\Repositories\Core\UserRepository;
 
 /**
  * Class AuthController

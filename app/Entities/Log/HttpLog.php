@@ -1,11 +1,11 @@
 <?php
 
-namespace ApiArchitect\Entities;
+namespace ApiArchitect\Entities\Log;
 
-use Doctrine\ORM\Mapping as ORM;
 use Faker\Provider\DateTime;
+use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use ApiArchitect\Abstracts\EntityAbstract;
+use ApiArchitect\Abstracts\Log\Entities\LogEntityAbstract;
 
 /**
  * Class HttpLog
@@ -14,22 +14,16 @@ use ApiArchitect\Abstracts\EntityAbstract;
  * @author James Kirkby <hello@jameskirkby.com>
  *
  * @ORM\Entity
- * @Gedmo\Loggable
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=true)
  * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\HttpLogRepository")
- * @ORM\Table(name="http_log", indexes={@ORM\Index(name="search_idx", columns={"route", "method"})})
+ * @ORM\Table(name="http_log", indexes={@ORM\Index(name="search_idx", columns={"route", "method", "log_ref"})})
  */
-class HttpLog extends EntityAbstract
+class HttpLog extends LogEntityAbstract
 {
-
-    public function __construct()
-    {
-        $this->contentType = 'HttpLog';
-    }
 
     /**
      * @var
      *
+     * @Gedmo\Versioned
      * @Gedmo\Blameable(on="create")
      * @Gedmo\IpTraceable(on="create")
      * @ORM\Column(type="string", unique=false, nullable=false)
@@ -39,6 +33,7 @@ class HttpLog extends EntityAbstract
     /**
      * @var
      *
+     * @Gedmo\Versioned
      * @Gedmo\Blameable(on="create")
      * @Gedmo\IpTraceable(on="create")
      * @ORM\Column(type="string", unique=false, nullable=false)
@@ -48,18 +43,12 @@ class HttpLog extends EntityAbstract
     /**
      * @var
      *
+     * @Gedmo\Versioned
+     * @Gedmo\Blameable(on="create")
+     * @Gedmo\IpTraceable(on="create")
      * @ORM\Column(type="text", nullable=false)
      */
     protected $params;
-
-    /**
-     * @var
-     *
-     * @Gedmo\Blameable(on="create")
-     * @Gedmo\IpTraceable(on="create")
-     * @ORM\Column(type="string", unique=true, nullable=false)
-     */
-    protected $logRef;
 
     /**
      * @return mixed
@@ -112,23 +101,6 @@ class HttpLog extends EntityAbstract
     public function setParams($params)
     {
         $this->params = $params;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLogRef()
-    {
-        return $this->logRef;
-    }
-
-    /**
-     * @return $this
-     */
-    public function setLogRef()
-    {
-        $this->logRef = md5(mt_rand(0,9999999999));
         return $this;
     }
 }

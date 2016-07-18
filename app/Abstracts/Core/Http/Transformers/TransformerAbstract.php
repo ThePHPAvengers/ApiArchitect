@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiArchitect\Abstracts;
+namespace ApiArchitect\Abstracts\Core\Http\Transformers;
 
 use Illuminate\Support\Collection;
 use League\Fractal\TransformerAbstract as SuperAbstract;

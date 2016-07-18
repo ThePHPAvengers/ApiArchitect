@@ -1,15 +1,14 @@
 <?php
 
-namespace ApiArchitect\Entities;
+namespace ApiArchitect\Entities\Core;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use LaravelDoctrine\ACL\Roles\HasRoles;
 use LaravelDoctrine\ACL\Mappings as ACL;
-use ApiArchitect\Abstracts\EntityAbstract;
+use ApiArchitect\Contracts\Log\DoctrineLogContract;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use LaravelDoctrine\ACL\Permissions\HasPermissions;
-use ApiArchitect\Contracts\DoctrineLoggableContract;
 use LaravelDoctrine\ACL\Contracts\HasRoles as HasRolesContract;
 use LaravelDoctrine\ORM\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
@@ -23,55 +22,40 @@ use LaravelDoctrine\ORM\Contracts\Auth\Authenticatable as AuthenticatableContrac
  * @author James Kirkby <me@jameskirkby.com>
  *
  * @ORM\Entity
- * @Gedmo\Loggable
- * @ORM\HasLifecycleCallbacks()
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=true)
  * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\UserRepository")
  * @ORM\Table(name="users", indexes={@ORM\Index(name="search_idx", columns={"email"})})
  */
-class User extends EntityAbstract implements AuthenticatableContract, HasRolesContract, HasPermissionContract, DoctrineLoggableContract, CanResetPassword
+class User extends Thing implements AuthenticatableContract, HasRolesContract, HasPermissionContract, DoctrineLogContract, CanResetPassword
 {
 
     use AuthenticatableTrait, HasRoles, HasPermissions, CanResetPasswordTrait;
 
     /**
-     * @var
-     *
-     * @ORM\Column(type="string", length=255, unique=false)
+     * @Gedmo\Versioned
+     * @Gedmo\Blameable(on="create")
+     * @Gedmo\IpTraceable(on="create")
+     * @ORM\Column(type="string", length=45, nullable=true)
      */
-    protected $name;
+    protected $userName;
 
     /**
      * @ORM\Column(type="string", length=254, unique=true)
+     * @Gedmo\Versioned
      */
     protected $email;
 
     /**
      * @ACL\HasRoles()
+     * @Gedmo\Versioned
      * @var \Doctrine\Common\Collections\ArrayCollection|\LaravelDoctrine\ACL\Contracts\Role[]
      */
     protected $roles;
 
     /**
      * @ACL\HasPermissions
+     * @Gedmo\Versioned
      */
     public $permissions;
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 
     /**
      * Returns user name, required for Doctrine behaviours loggable
@@ -80,16 +64,6 @@ class User extends EntityAbstract implements AuthenticatableContract, HasRolesCo
     public function getUserName()
     {
         return $this->getName();
-    }
-
-    /**
-     * @param $name
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
     }
 
     /**

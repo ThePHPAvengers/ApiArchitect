@@ -22,8 +22,8 @@ $api->version('v1', function ($api)
                 {
                     $api->group(['prefix' => 'auth'], function ($api)
                     {
-                        Route::get('github', 'Auth\Social\GitHubController@redirectToProvider');
-                        Route::get('github/callback', 'Auth\Social\GitHubController@handleProviderCallback');
+                        $api->get('facebook', 'Auth\OAuth\facebookController@redirectToProvider');
+                        $api->get('github/facebook', 'Auth\OAuth\facebookController@handleProviderCallback');
                     });
                 });
 

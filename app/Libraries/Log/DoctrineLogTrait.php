@@ -1,14 +1,14 @@
 <?php
 
-namespace ApiArchitect\Libraries;
+namespace ApiArchitect\Libraries\Log;
 
 /**
- * Class DoctrineLoggableTrait
+ * Class DoctrineLogTrait
  *
  * @package ApiArchitect\Libraries
  * @author James Kirkby <hello@jameskirkby.com>
  */
-class DoctrineLoggableTrait
+class DoctrineLogTrait
 {
 
 }

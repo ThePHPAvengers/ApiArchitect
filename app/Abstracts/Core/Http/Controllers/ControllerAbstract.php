@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiArchitect\Abstracts;
+namespace ApiArchitect\Abstracts\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;

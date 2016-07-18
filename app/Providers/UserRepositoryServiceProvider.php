@@ -2,9 +2,9 @@
 
 namespace ApiArchitect\Providers;
 
-use ApiArchitect\Entities\User;
+use ApiArchitect\Entities\Core\User;
 use Illuminate\Support\ServiceProvider;
-use ApiArchitect\Repositories\UserRepository;
+use ApiArchitect\Repositories\Core\UserRepository;
 
 /**
  * Class AppServiceProvider
@@ -52,6 +52,6 @@ class UserRepositoryServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['ApiArchitect\Repositories\UserRepository'];
+        return ['ApiArchitect\Repositories\Core\UserRepository'];
     }
 }

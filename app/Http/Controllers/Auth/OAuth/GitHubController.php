@@ -2,15 +2,15 @@
 
 namespace Api\Controllers\Auth\OAuth;
 
-use ApiArchitect\Contracts\SocialiteCallBackControllerContract;
 use Laravel\Socialite\Facades\Socialite;
+use ApiArchitect\Contracts\Auth\OAuthCallBackControllerContract;
 
 /**
  * Class GitHubController
  *
  * @package Api\Controllers\Auth\Social
  */
-class GitHubController implements SocialiteCallBackControllerContract
+class GitHubController implements OAuthCallBackControllerContract
 {
 
     /**

@@ -3,8 +3,7 @@
 namespace Api\Transformers;
 
 use ApiArchitect\Entities\Dog;
-use Illuminate\Support\Collection;
-use ApiArchitect\Abstracts\TransformerAbstract;
+use ApiArchitect\Abstracts\Core\Http\Transformers\TransformerAbstract;
 
 /**
  * Class DogTransformer

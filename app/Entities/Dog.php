@@ -3,8 +3,8 @@
 namespace ApiArchitect\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiArchitect\Entities\Core\Thing;
 use Gedmo\Mapping\Annotation as Gedmo;
-use ApiArchitect\Abstracts\EntityAbstract;
 
 /**
  * Class Dog
@@ -12,28 +12,25 @@ use ApiArchitect\Abstracts\EntityAbstract;
  * @author James Kirkby <hello@jameskirkby.com>
  *
  * @ORM\Entity
- * @Gedmo\Loggable
  * @ORM\Table(name="dogs")
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=true)
  * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\Dog\DogRepository")
  */
-class Dog extends EntityAbstract
+class Dog extends Thing
 {
 
     /**
-     * @var
-     *
-     * @ORM\Column(type="string")
-     */
-    protected $name;
-
-    /**
-     * @ORM\Column(type="string")
+     * @Gedmo\Versioned
+     * @Gedmo\Blameable(on="create")
+     * @Gedmo\IpTraceable(on="create")
+     * @ORM\Column(type="string", length=45, nullable=true)
      */
     protected $age;
 
     /**
-     * @ORM\Column(type="string", unique=false, nullable=true)
+     * @Gedmo\Versioned
+     * @Gedmo\Blameable(on="create")
+     * @Gedmo\IpTraceable(on="create")
+     * @ORM\Column(type="string", length=45, nullable=true)
      */
     protected $color;
 
@@ -46,32 +43,6 @@ class Dog extends EntityAbstract
     {
         $this->name = $name;
         $this->age  = $age;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param $name
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
     }
 
     /**

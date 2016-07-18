@@ -1,12 +1,12 @@
 <?php
 
-namespace ApiArchitect\Abstracts;
+namespace ApiArchitect\Abstracts\Core\Repositories;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMInvalidArgumentException;
 use LaravelDoctrine\ORM\Pagination\Paginatable;
-use ApiArchitect\Contracts\RepositoryContract;
+use ApiArchitect\Contracts\Core\RepositoryContract;
 
 /**
  * Class RepositoryAbstract

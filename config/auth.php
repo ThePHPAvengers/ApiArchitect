@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => 'ApiArchitect\Entities\User',
+    'model' => 'ApiArchitect\Entities\Core\User',
 
     /*
     |--------------------------------------------------------------------------

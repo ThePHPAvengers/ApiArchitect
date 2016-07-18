@@ -1,9 +1,9 @@
 <?php
 
-namespace ApiArchitect\Repositories;
+namespace ApiArchitect\Repositories\Core;
 
-use ApiArchitect\Entities\User;
-use ApiArchitect\Abstracts\RepositoryAbstract;
+use ApiArchitect\Abstracts\Core\Repositories\RepositoryAbstract;
+use ApiArchitect\Entities\Core\User;
 
 /**
  * Class UserRepository

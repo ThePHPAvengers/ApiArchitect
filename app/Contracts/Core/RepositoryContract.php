@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiArchitect\Contracts;
+namespace ApiArchitect\Contracts\Core;
 
 /**
  * Interface RepositoryInterface

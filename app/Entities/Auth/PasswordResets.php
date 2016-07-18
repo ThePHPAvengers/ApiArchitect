@@ -1,8 +1,8 @@
 <?php
 
-namespace ApiArchitect\Entities;
+namespace ApiArchitect\Entities\Auth;
 
-use ApiArchitect\Abstracts\EntityAbstract;
+use ApiArchitect\Abstracts\Core\Entities\EntityAbstract;
 
 /**
  * Class PasswordResets

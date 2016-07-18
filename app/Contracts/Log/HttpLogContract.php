@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiArchitect\Contracts;
+namespace ApiArchitect\Contracts\Log;
 
 use Closure;
 use Illuminate\Http\Request;

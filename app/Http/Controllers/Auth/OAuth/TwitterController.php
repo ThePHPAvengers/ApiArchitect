@@ -10,7 +10,7 @@ use Laravel\Socialite\Facades\Socialite;
  * 
  * @package Api\Controllers\Auth\Social
  */
-class FacebookController implements SocialiteCallBackControllerContract
+class TwitterController implements SocialiteCallBackControllerContract
 {
 
     /**

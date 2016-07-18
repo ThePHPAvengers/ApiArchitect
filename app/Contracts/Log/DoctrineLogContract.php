@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiArchitect\Contracts;
+namespace ApiArchitect\Contracts\Log;
 
 /**
  * Interface DoctrineLoggableContract
@@ -8,7 +8,7 @@ namespace ApiArchitect\Contracts;
  * @package ApiArchitect\Contracts
  * @author James Kirkby <hello@jameskirkby.com>
  */
-interface DoctrineLoggableContract
+interface DoctrineLogContract
 {
     /**
      * @return mixed

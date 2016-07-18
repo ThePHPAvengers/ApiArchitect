@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'roles'         => [
-        'entity' => ApiArchitect\Entities\Role::class,
+        'entity' => ApiArchitect\Entities\Auth\Role::class,
     ],
     /*
     |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ return [
     | Organisations
     |--------------------------------------------------------------------------
     */
-    'organisations' => [
-        'entity' => App\Organisation::class,
-    ],
+//    'organisations' => [
+//        'entity' => App\Organisation::class,
+//    ],
 ];

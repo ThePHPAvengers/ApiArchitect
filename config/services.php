@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model'  => ApiArchitect\Entities\User::class,
+        'model'  => ApiArchitect\Entities\Core\User::class,
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
