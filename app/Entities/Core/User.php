@@ -22,7 +22,7 @@ use LaravelDoctrine\ORM\Contracts\Auth\Authenticatable as AuthenticatableContrac
  * @author James Kirkby <me@jameskirkby.com>
  *
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\UserRepository")
+ * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\Core\UserRepository")
  * @ORM\Table(name="users", indexes={@ORM\Index(name="search_idx", columns={"email"})})
  */
 class User extends Thing implements AuthenticatableContract, HasRolesContract, HasPermissionContract, DoctrineLogContract, CanResetPassword

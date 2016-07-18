@@ -14,6 +14,9 @@ use ApiArchitect\Repositories\Core\NodeRepository;
  */
 class NodeRepositoryServiceProvider extends ServiceProvider
 {
+
+    protected $defer = true;
+
     /**
      * Bootstrap any application services.
      *
@@ -38,5 +41,15 @@ class NodeRepositoryServiceProvider extends ServiceProvider
                 $app['em']->getClassMetaData(Node::class)
             );
         });
+    }
+
+    /**
+     * Get the services provided by the provider since we are deferring load.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['ApiArchitect\Repositories\Core\NodeRepository'];
     }
 }

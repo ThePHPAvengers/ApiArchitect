@@ -3,7 +3,7 @@
 namespace ApiArchitect\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use ApiArchitect\Adapters\User\DoctrineUserAdapter;
+use ApiArchitect\Adapters\Auth\DoctrineUserAdapter;
 
 /**
  * Class DoctrineUserAdapterServiceProvider

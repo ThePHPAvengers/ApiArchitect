@@ -20,8 +20,7 @@ abstract class NodeAbstract
      * @TODO custom generated id
      *
      * @ORM\Id
-     * @Gedmo\Versioned
-     * @ORM\GeneratedValue
+g     * @ORM\GeneratedValue
      * @ORM\Column(type="integer", unique=true, nullable=false)
      */
     protected $id;
