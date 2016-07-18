@@ -13,8 +13,10 @@ interface NodeContract
 
     /**
      * @ORM\PrePersist
+     * @param $event
+     * @return
      */
-    public function prePersist();
+    public function prePersist($event);
 
     /**
      * @ORM\PreUpdate

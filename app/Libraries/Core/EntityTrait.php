@@ -70,10 +70,13 @@ trait EntityTrait
 
     /**
      * @ORM\PrePersist
+     * @param $event
      */
-    public function prePersist()
+    public function prePersist($event)
     {
-        $this->node = EntityManager::getRepository('ApiArchitect\Entities\Core\Node')->create([]);
+        $entity = $event->getEntity();
+
+        $this->node = EntityManager::getRepository('ApiArchitect\Entities\Core\Node')->create(['nodeType' => $entity->nodeType]);
 
         $this->setNid($this->node->getId());
     }

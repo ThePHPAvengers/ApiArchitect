@@ -21,6 +21,19 @@ class HttpLog extends LogEntityAbstract
 {
 
     /**
+     * @var string
+     */
+    public $nodeType;
+
+    /**
+     * HttpLog constructor.
+     */
+    public function __construct()
+    {
+        $this->nodeType = 'HttpLog';
+    }
+
+    /**
      * @var
      *
      * @Gedmo\Blameable(on="create")

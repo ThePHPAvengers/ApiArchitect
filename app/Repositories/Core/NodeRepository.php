@@ -21,6 +21,7 @@ class NodeRepository extends RepositoryAbstract
     public function create(array $data)
     {
         $node = new Node();
+        $node->setNodeType($data['nodeType']);
         $this->_em->persist($node);
         $this->_em->flush();
 

@@ -31,7 +31,6 @@ final class Node extends NodeAbstract
      * @var
      *
      * @Gedmo\Blameable(on="create")
-     * @Gedmo\IpTraceable(on="create")
      * @ORM\Column(type="string", nullable=false)
      */
     protected $nodeType;
@@ -40,7 +39,6 @@ final class Node extends NodeAbstract
      * @var string $createdBy
      *
      * @Gedmo\Blameable(on="create")
-     * @Gedmo\IpTraceable(on="create")
      * @ORM\Column(type="string", nullable=false)
      * @ORM\ManyToOne(targetEntity="ApiArchitect\Entities\Core\User")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id")
@@ -52,7 +50,6 @@ final class Node extends NodeAbstract
      *
      * @ORM\Column(type="string")
      * @Gedmo\Blameable(on="update")
-     * @Gedmo\IpTraceable(on="update")
      * @ORM\ManyToOne(targetEntity="ApiArchitect\Entities\Core\User")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id")
      */
@@ -61,7 +58,6 @@ final class Node extends NodeAbstract
     /**
      * @var string $contentChangedBy
      *
-     * @Gedmo\IpTraceable(on="update")
      * @Gedmo\Blameable(on="change", field={"id","name","email"})
      * @ORM\Column(name="content_changed_by", type="string", nullable=true)
      */
