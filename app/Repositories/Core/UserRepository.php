@@ -2,8 +2,8 @@
 
 namespace ApiArchitect\Repositories\Core;
 
-use ApiArchitect\Abstracts\Core\Repositories\RepositoryAbstract;
 use ApiArchitect\Entities\Core\User;
+use ApiArchitect\Abstracts\Core\Repositories\RepositoryAbstract;
 
 /**
  * Class UserRepository

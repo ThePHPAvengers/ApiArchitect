@@ -3,10 +3,10 @@
 namespace Api\Middleware;
 
 use Illuminate\Support\Facades\Event;
-use ApiArchitect\Events\RequestLogEvent;
+use ApiArchitect\Events\Log\RequestLogEvent;
 use Closure;
 use Illuminate\Http\Request;
-use ApiArchitect\Repositories\HttpLogRepository;
+use ApiArchitect\Repositories\Log\HttpLogRepository;
 
 /**
  * Class HttpLog

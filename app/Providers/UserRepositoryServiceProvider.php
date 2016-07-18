@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use ApiArchitect\Repositories\Core\UserRepository;
 
 /**
- * Class AppServiceProvider
+ * Class UserServiceProvider
  *
  * @package ApiArchitect\Providers
  * @author James Kirkby <hello@jameskirkby.com>

@@ -2,7 +2,7 @@
 
 namespace ApiArchitect\Entities\Log;
 
-use Faker\Provider\DateTime;
+use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use ApiArchitect\Abstracts\Log\Entities\LogEntityAbstract;
@@ -14,8 +14,8 @@ use ApiArchitect\Abstracts\Log\Entities\LogEntityAbstract;
  * @author James Kirkby <hello@jameskirkby.com>
  *
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\HttpLogRepository")
- * @ORM\Table(name="http_log", indexes={@ORM\Index(name="search_idx", columns={"route", "method", "log_ref"})})
+ * @ORM\Entity(repositoryClass="ApiArchitect\Repositories\Log\HttpLogRepository")
+ * @ORM\Table(name="http_log", indexes={@ORM\Index(name="search_idx", columns={"route", "method"})})
  */
 class HttpLog extends LogEntityAbstract
 {
@@ -23,7 +23,6 @@ class HttpLog extends LogEntityAbstract
     /**
      * @var
      *
-     * @Gedmo\Versioned
      * @Gedmo\Blameable(on="create")
      * @Gedmo\IpTraceable(on="create")
      * @ORM\Column(type="string", unique=false, nullable=false)
@@ -33,7 +32,6 @@ class HttpLog extends LogEntityAbstract
     /**
      * @var
      *
-     * @Gedmo\Versioned
      * @Gedmo\Blameable(on="create")
      * @Gedmo\IpTraceable(on="create")
      * @ORM\Column(type="string", unique=false, nullable=false)
@@ -43,9 +41,6 @@ class HttpLog extends LogEntityAbstract
     /**
      * @var
      *
-     * @Gedmo\Versioned
-     * @Gedmo\Blameable(on="create")
-     * @Gedmo\IpTraceable(on="create")
      * @ORM\Column(type="text", nullable=false)
      */
     protected $params;

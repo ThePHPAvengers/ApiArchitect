@@ -2,34 +2,26 @@
 
 namespace ApiArchitect\Providers;
 
-
-use Illuminate\Cache\CacheManager;
 use ApiArchitect\Entities\Core\Node;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Doctrine\Common\Cache\MemcachedCache;
 use ApiArchitect\Repositories\Core\NodeRepository;
 
 /**
- * Class AppServiceProvider
+ * Class NodeServiceProvider
  *
  * @package ApiArchitect\Providers
  * @author James Kirkby <hello@jameskirkby.com>
  */
-class AppServiceProvider extends ServiceProvider
+class NodeRepositoryServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap any application services.
      *
-     * @param CacheManager $cache
+     * @return void
      */
-    public function boot(CacheManager $cache)
+    public function boot()
     {
-        $cache->extend('memcache', function(Application $app) {
-        $memcached = new \Memcache;
-        return new MemcachedCache($memcached);
-    });
+        //
     }
 
     /**
@@ -39,6 +31,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        $this->app->bind(NodeRepository::class, function($app) {
+            // This is what Doctrine's EntityRepository needs in its constructor.
+            return new NodeRepository(
+                $app['em'],
+                $app['em']->getClassMetaData(Node::class)
+            );
+        });
     }
 }

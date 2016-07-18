@@ -1,9 +1,9 @@
 <?php
 
-namespace ApiArchitect\Listeners;
+namespace ApiArchitect\Listeners\Log;
 
-use ApiArchitect\Events\RequestLogEvent;
-use ApiArchitect\Repositories\HttpLogRepository;
+use ApiArchitect\Events\Log\RequestLogEvent;
+use ApiArchitect\Repositories\Log\HttpLogRepository;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;

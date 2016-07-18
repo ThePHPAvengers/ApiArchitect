@@ -19,6 +19,20 @@ abstract class RepositoryAbstract extends EntityRepository implements Repository
     use Paginatable;
 
     /**
+     * @param array $data
+     * @return mixed
+     */
+    abstract public function create(array $data);
+
+    /**
+     * @param int $id
+     * @param array $updatedEntity
+     * @return mixed
+     */
+    abstract public function update($id, array $updatedEntity);
+
+
+    /**
      * @return array
      */
     public function all()
@@ -46,12 +60,6 @@ abstract class RepositoryAbstract extends EntityRepository implements Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
-     */
-    abstract public function create(array $data);
-
-    /**
      * @param int $id
      * @return bool|OptimisticLockException|ORMInvalidArgumentException|\Exception
      */
@@ -68,12 +76,4 @@ abstract class RepositoryAbstract extends EntityRepository implements Repository
         }
         return true;
     }
-
-    /**
-     * @param int $id
-     * @param array $updatedEntity
-     * @return mixed
-     */
-    abstract public function update($id, array $updatedEntity);
-
 }

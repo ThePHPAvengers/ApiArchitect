@@ -2,6 +2,8 @@
 
 namespace ApiArchitect\Entities\Log;
 
+use Doctrine\ORM\Cache;
+use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use ApiArchitect\Contracts\Log\DoctrineLogContract;
@@ -13,6 +15,7 @@ use ApiArchitect\Abstracts\Log\Entities\LogEntityAbstract;
  * @author James Kirkby <hello@jameskirkby.com>
  *
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="ext_log_entries", indexes={@ORM\Index(name="search_idx", columns={"object_id"})})
  * @ORM\Entity(repositoryClass="Gedmo\Loggable\Entity\Repository\LogEntryRepository")
  */
@@ -59,6 +62,14 @@ class DoctrineLog extends LogEntityAbstract implements DoctrineLogContract
      * @ORM\Column(length=255, nullable=true)
      */
     protected $username;
+
+    /**
+     * @var
+     *
+     * @ORM\Column(type="datetime", nullable=false)
+     * @Gedmo\Timestampable(on="create")
+     */
+    protected $loggedAt;
 
     /**
      * Get action

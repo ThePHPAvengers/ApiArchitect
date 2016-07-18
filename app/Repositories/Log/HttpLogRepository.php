@@ -1,14 +1,14 @@
 <?php
 
-namespace ApiArchitect\Repositories\Core;
+namespace ApiArchitect\Repositories\Log;
 
-use ApiArchitect\Abstracts\Core\Repositories\RepositoryAbstract;
 use Illuminate\Http\Request;
 use Doctrine\ORM\EntityManager;
-use ApiArchitect\Entities\HttpLog;
+use ApiArchitect\Entities\Log\HttpLog;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Input;
 use Doctrine\ORM\ORMInvalidArgumentException;
+use ApiArchitect\Abstracts\Core\Repositories\RepositoryAbstract;
 
 /**
  * Class HttpLogRepository
@@ -30,7 +30,6 @@ class HttpLogRepository extends RepositoryAbstract
         $httpLog->setRoute($request->fullUrl());
         $httpLog->setMethod($request->getMethod());
         $httpLog->setParams(http_build_query(Input::all()));
-        $httpLog->setLogRef();
 
         $this->_em->persist($httpLog);
         $this->_em->flush();

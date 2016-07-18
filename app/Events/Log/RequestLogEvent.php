@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiArchitect\Events;
+namespace ApiArchitect\Events\Log;
 
 use ApiArchitect\Events\Event;
 use Illuminate\Queue\SerializesModels;

@@ -2,9 +2,9 @@
 
 namespace ApiArchitect\Providers;
 
-use ApiArchitect\Entities\HttpLog;
+use ApiArchitect\Entities\Log\HttpLog;
 use Illuminate\Support\ServiceProvider;
-use ApiArchitect\Repositories\HttpLogRepository;
+use ApiArchitect\Repositories\Log\HttpLogRepository;
 
 /**
  * Class HttpLogRepositoryServiceProvider
@@ -53,6 +53,6 @@ class HttpLogRepositoryServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['ApiArchitect\Repositories\HttpLogRepository'];
+        return ['ApiArchitect\Repositories\Log\HttpLogRepository'];
     }
 }

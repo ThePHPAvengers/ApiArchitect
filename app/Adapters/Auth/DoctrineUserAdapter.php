@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiArchitect\Adapters\User;
+namespace ApiArchitect\Adapters\Auth;
 
 use Doctrine\ORM\EntityManager;
 use Tymon\JWTAuth\Providers\User\UserInterface;

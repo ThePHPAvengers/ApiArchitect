@@ -51,6 +51,6 @@ class DoctrineUserAdapterServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['ApiArchitect\Adapters\User\DoctrineUserAdapter'];
+        return ['ApiArchitect\Adapters\Auth\DoctrineUserAdapter'];
     }
 }

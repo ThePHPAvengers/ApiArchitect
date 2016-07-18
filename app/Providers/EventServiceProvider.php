@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'ApiArchitect\Events\RequestLogEvent' => [
-            'ApiArchitect\Listeners\RequestLogEventListener',
+        'ApiArchitect\Events\Log\RequestLogEvent' => [
+            'ApiArchitect\Listeners\Log\RequestLogEventListener',
         ],
     ];
 

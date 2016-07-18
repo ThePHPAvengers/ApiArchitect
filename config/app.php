@@ -152,6 +152,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         ApiArchitect\Providers\DogRepositoryServiceProvider::class,
         ApiArchitect\Providers\UserRepositoryServiceProvider::class,
+        ApiArchitect\Providers\NodeRepositoryServiceProvider::class,
         LaravelDoctrine\Migrations\MigrationsServiceProvider::class,
         LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
         ApiArchitect\Providers\HttpLogRepositoryServiceProvider::class,
