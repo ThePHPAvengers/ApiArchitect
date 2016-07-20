@@ -5,6 +5,12 @@ namespace ApiArchitect\Providers;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+/**
+ * Class RouteServiceProvider
+ *
+ * @package ApiArchitect\Providers
+ * @author James Kirkby <hello@jameskirkby.com>
+ */
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -14,8 +20,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    // protected $namespace = 'ApiArchitect\Http\Controllers';
-    protected $namespace = '';
+    protected $namespace = 'ApiArchitect';
 
     /**
      * Define your route model bindings, pattern filters, etc.

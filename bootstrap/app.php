@@ -28,7 +28,7 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    Api\Kernel::class
+    ApiArchitect\Http\Kernel::class
 );
 
 $app->singleton(
@@ -36,6 +36,7 @@ $app->singleton(
     ApiArchitect\Console\Kernel::class
 );
 
+//@TODO FIX HANDLER POINTER
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     ApiArchitect\Exceptions\Handler::class

@@ -29,7 +29,8 @@ return [
                 'App'
             ],
             'paths'      => [
-                base_path('app/Entities')
+                base_path('app/Entities'),
+//                base_path('app/DevPackages/ApiArchitectCore/src/Entities')
             ],
             'repository' => Doctrine\ORM\EntityRepository::class,
             'proxies'    => [
@@ -155,7 +156,7 @@ return [
     |
     */
     'cache'                     => [
-        'default'                => env('DOCTRINE_CACHE', 'memcached'),
+        'default'                => env('DOCTRINE_CACHE', 'redis'),
         'namespace'              => null,
         'second_level'           => false,
     ],

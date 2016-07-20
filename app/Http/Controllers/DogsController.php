@@ -1,12 +1,12 @@
 <?php
 
-namespace Api\Controllers;
+namespace ApiArchitect\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Api\Requests\DogRequest;
+use  ApiArchitect\Http\Requests\DogRequest;
 use Illuminate\Support\Collection;
-use Api\Transformers\DogTransformer;
+use  ApiArchitect\Http\Transformers\DogTransformer;
 use ApiArchitect\Repositories\DogRepository;
+use ApiArchitect\Core\Http\Controllers\ApiController;
 
 /**
  * Class DogsController

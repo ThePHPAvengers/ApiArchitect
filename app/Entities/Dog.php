@@ -3,7 +3,7 @@
 namespace ApiArchitect\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
-use ApiArchitect\Entities\Core\Thing;
+use ApiArchitect\Core\Entities\Thing;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -17,6 +17,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Dog extends Thing
 {
+
+    /**
+     * @var string
+     */
+    public $nodeType;
 
     /**
      * @Gedmo\Versioned
@@ -41,6 +46,7 @@ class Dog extends Thing
      */
     public function __construct($name, $age)
     {
+        $this->nodeType = 'Dog';
         $this->name = $name;
         $this->age  = $age;
     }

@@ -36,35 +36,14 @@
             "database"
         ],
         "psr-4": {
+            "Api\\": "app/Http",
             "ApiArchitect\\": "app/"
         }
     },
     "autoload-dev": {
         "classmap": [
             "tests/TestCase.php"
-        ],
-        "psr-4": {
-            "ApiArchitect\\Core\\": [
-                "app/DevPackages/ApiArchitectCore/src",
-                "app/DevPackages/ApiArchitectCore/tests"
-            ],
-            "ApiArchitect\\Log\\": [
-                "app/DevPackages/ApiArchitectLog/src",
-                "app/DevPackage/ApiArchitectLog/tests"
-            ],
-            "ApiArchitect\\Auth\\": [
-                "app/DevPackages/ApiArchitectAuth/src",
-                "app/DevPackages/ApiArchitectAuth/tests"
-            ],
-            "ThePHPAvengers\\LaravelUUID\\": [
-                "app/DevPackages/LaravelUUID/src",
-                "app/DevPackages/LaravelUUID/tests"
-            ],
-            "ThePHPAvengers\\UUID\\": [
-                "app/DevPackages/UUID/src",
-                "app/DevPackages/UUID/tests"
-            ]
-        }
+        ]
     },
     "scripts": {
         "post-install-cmd": [

@@ -8,3 +8,5 @@ composer.lock
 /config/jwt.php
 .idea/*
 .DS_Store
+composer.json
+/app/DevPackages/*

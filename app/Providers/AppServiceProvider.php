@@ -2,13 +2,8 @@
 
 namespace ApiArchitect\Providers;
 
-
-use Illuminate\Cache\CacheManager;
-use ApiArchitect\Entities\Core\Node;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Doctrine\Common\Cache\MemcachedCache;
-use ApiArchitect\Repositories\Core\NodeRepository;
 
 /**
  * Class AppServiceProvider
@@ -22,14 +17,10 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      *
-     * @param CacheManager $cache
      */
-    public function boot(CacheManager $cache)
+    public function boot()
     {
-        $cache->extend('memcache', function(Application $app) {
-        $memcached = new \Memcache;
-        return new MemcachedCache($memcached);
-    });
+
     }
 
     /**

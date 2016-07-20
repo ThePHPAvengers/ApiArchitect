@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace ApiArchitect\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -17,14 +17,14 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        // \ApiArchitect\Http\Middleware\EncryptCookies::class,
+        \Barryvdh\Cors\HandleCors::class,
+        \ApiArchitect\Log\Http\Middleware\RequestLog::class,
+        \ApiArchitect\Log\Http\Middleware\EncryptCookies::class,
+        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        \LucaDegasperi\OAuth2Server\Middleware\OAuthExceptionHandlerMiddleware::class,
         // \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         // \Illuminate\Session\Middleware\StartSession::class,
         // \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \Api\Middleware\HttpLog::class,
-        \Barryvdh\Cors\HandleCors::class,
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \LucaDegasperi\OAuth2Server\Middleware\OAuthExceptionHandlerMiddleware::class,
     ];
 
     /**
@@ -33,11 +33,11 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Api\Middleware\Authenticate::class,
-        'guest' => \Api\Middleware\RedirectIfAuthenticated::class,
         'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class,
         'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
+        'auth' => \ApiArchitect\Auth\Http\Middleware\Authenticate::class,
         'oauth' => \LucaDegasperi\OAuth2Server\Middleware\OAuthMiddleware::class,
+        'guest' => \ApiArchitect\Auth\Http\Middleware\RedirectIfAuthenticated::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'oauth-user' => \LucaDegasperi\OAuth2Server\Middleware\OAuthUserOwnerMiddleware::class,
         'oauth-client' => \LucaDegasperi\OAuth2Server\Middleware\OAuthClientOwnerMiddleware::class,

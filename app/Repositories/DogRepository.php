@@ -2,10 +2,10 @@
 
 namespace ApiArchitect\Repositories;
 
-use ApiArchitect\Abstracts\Core\Repositories\RepositoryAbstract;
 use ApiArchitect\Entities\Dog;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMInvalidArgumentException;
+use ApiArchitect\Core\Abstracts\Repositories\AbstractRepository;
 
 /**
  * Class DogRepository
@@ -13,7 +13,7 @@ use Doctrine\ORM\ORMInvalidArgumentException;
  * @package ApiArchitect\Repositories\Dog
  * @author James Kirkby <hello@jameskirkby.com>
  */
-class DogRepository extends RepositoryAbstract
+class DogRepository extends AbstractRepository
 {
 
     /**

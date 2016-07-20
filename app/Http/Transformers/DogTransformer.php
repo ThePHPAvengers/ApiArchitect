@@ -1,9 +1,9 @@
 <?php
 
-namespace Api\Transformers;
+namespace ApiArchitect\Http\Transformers;
 
 use ApiArchitect\Entities\Dog;
-use ApiArchitect\Abstracts\Core\Http\Transformers\TransformerAbstract;
+use ApiArchitect\Core\Abstracts\Http\Transformers\TransformerAbstract;
 
 /**
  * Class DogTransformer

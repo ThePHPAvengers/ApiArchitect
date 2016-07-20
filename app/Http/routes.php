@@ -7,66 +7,69 @@ $api->version('v1', function ($api)
 {
 
     // Set our namespace for the underlying routes
-    $api->group(['namespace' => 'Api\Controllers',
+    $api->group([
         'middleware' =>
             '\Barryvdh\Cors\HandleCors::class',
-        '\Api\Middleware\HttpLog::class'],
+        '\ApiArchitect\Log\Middleware\RequestLog::class'],
 
         function ($api) {
 
             // V1 Routes
             $api->group(['prefix' => 'v1'], function ($api)
             {
+
                 // Socialite Callback Routes
-                $api->group(['prefix' => 'social'], function ($api)
+                $api->group(['namespace' => '\ApiArchitect\Auth\Http\Controllers'], function ($api)
                 {
-                    $api->group(['prefix' => 'auth'], function ($api)
-                    {
-                        $api->get('facebook', 'Auth\OAuth\facebookController@redirectToProvider');
-                        $api->get('github/facebook', 'Auth\OAuth\facebookController@handleProviderCallback');
-                    });
-                });
-
-                // User Reset Routes
-                $api->group(['prefix' => 'users'], function ($api)
-                {
-                    // Password reset link request routes...
-                    $api->get('password/email', 'Auth\PasswordController@getEmail');
-                    $api->post('password/email', 'Auth\PasswordController@postEmail');
-
-                    // Password reset routes...
-                    $api->get('password/reset/{token}', 'Auth\PasswordController@getReset');
-                    $api->post('password/reset', 'Auth\PasswordController@postReset');
-                });
-
-                // JWT Routes
-                $api->group(['prefix' => 'jwt'], function ($api)
-                {
-                    $api->group(['prefix' => 'auth'], function ($api)
+                    // User Reset Routes
+                    $api->group(['prefix' => 'users'], function ($api)
                     {
                         // Login route
-                        $api->post('login', 'Auth\JWTController@authenticate');
-                        $api->post('register', 'Auth\JWTController@register');
+                        $api->post('login', 'JWTController@authenticate');//@TODO bind this to a config option
+                        $api->post('register', 'JWTController@register');
 
-                        // Dogs! All routes in here are protected and thus need a valid token
-                        //$api->group( [ 'protected' => true, 'middleware' => 'jwt.refresh' ], function ($api) {
+                        // Password reset link request routes...
+                        $api->get('password/email', 'PasswordController@getEmail');
+                        $api->post('password/email', 'PasswordController@postEmail');
+
+                        // Password reset routes...
+                        $api->get('password/reset/{token}', 'PasswordController@getReset');
+                        $api->post('password/reset', 'PasswordController@postReset');
+
                         $api->group( [ 'middleware' => 'jwt.auth' ], function ($api)
                         {
-                            $api->get('dogs', 'DogsController@index');
-                            $api->get('users/me', 'Auth\JWTController@me');//@TODO BROKEN
-                            $api->post('dogs', 'DogsController@store');
-                            $api->get('dogs/{id}', 'DogsController@show');
-                            $api->put('dogs/{id}', 'DogsController@update');
-                            $api->delete('dogs/{id}', 'DogsController@destroy');
-                            $api->get('validate_token', 'Auth\JWTController@validateToken');
+                            $api->get('users/me', 'JWTController@me');//@TODO BROKEN
                         });
+                    });
 
+                    $api->group(['prefix' => 'auth'], function ($api)
+                    {
+                        $api->group( [ 'middleware' => 'jwt.auth' ], function ($api)
+                        {
+                            $api->get('validate_token', 'JWTController@validateToken');
+                        });
                     });
 
                     // Oauth Provider Routes
                     $api->group(['prefix' => 'oauth'], function ($api)
                     {
+                        $api->get('facebook', 'OAuth\FacebookController@redirectToProvider');
+                        $api->get('github', 'OAuth\FacebookController@handleProviderCallback');
+                    });
 
+                });
+
+                $api->group(['namespace' => '\ApiArchitect\Http\Controllers'], function ($api)
+                {
+                    // Dogs! All routes in here are protected and thus need a valid token
+                    //$api->group( [ 'protected' => true, 'middleware' => 'jwt.refresh' ], function ($api) {
+                    $api->group( [ 'middleware' => 'jwt.auth' ], function ($api)
+                    {
+                        $api->get('dogs', 'DogsController@index');
+                        $api->post('dogs', 'DogsController@store');
+                        $api->get('dogs/{id}', 'DogsController@show');
+                        $api->put('dogs/{id}', 'DogsController@update');
+                        $api->delete('dogs/{id}', 'DogsController@destroy');
                     });
                 });
             });

@@ -5,6 +5,12 @@ namespace ApiArchitect\Providers;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
+/**
+ * Class EventServiceProvider
+ *
+ * @package ApiArchitect\Providers
+ * @author James Kirkby <hello@jameskirkby.com>
+ */
 class EventServiceProvider extends ServiceProvider
 {
     /**
